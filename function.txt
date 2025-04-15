@@ -1,2 +1,15 @@
+<<<<<<< main
+This is a representation of an unfinished function a group member is working on.
+<<<<<<< Updated upstream
+This is a new change from Kaden Heley.
+This is a new change from Kris Rinnels.
+This is a new change from Luke Ness.
+
+This is the changes made to this branch while you were working on rb-test.
+=======
+This is the changes made to this branch while you were working on rb-test.
+>>>>>>> Stashed changes
+=======
 “This is a representation of an unfinished function a group member is working
 on.”
+>>>>>>> rb-test-luke-ness
