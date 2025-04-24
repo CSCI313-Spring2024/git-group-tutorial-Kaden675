@@ -1,15 +1,24 @@
+<<<<<<< HEAD
 <<<<<<< main
+=======
+>>>>>>> 82530a40be32f915cc5e88fa46bf9da359269a95
 This is a representation of an unfinished function a group member is working on.
 <<<<<<< Updated upstream
 This is a new change from Kaden Heley.
 This is a new change from Kris Rinnels.
+<<<<<<< HEAD
 This is a new change from Luke Ness.
+=======
+>>>>>>> 82530a40be32f915cc5e88fa46bf9da359269a95
 
 This is the changes made to this branch while you were working on rb-test.
 =======
 This is the changes made to this branch while you were working on rb-test.
 >>>>>>> Stashed changes
+<<<<<<< HEAD
 =======
 “This is a representation of an unfinished function a group member is working
 on.”
 >>>>>>> rb-test-luke-ness
+=======
+>>>>>>> 82530a40be32f915cc5e88fa46bf9da359269a95
