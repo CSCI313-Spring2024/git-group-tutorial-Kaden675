@@ -1,9 +1,9 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-
 import { routes } from './app.routes';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore} from '@angular/fire/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA7oqbzsWzKV0Q1c1C2iLYU90cECK1Ag3g",
@@ -16,5 +16,14 @@ const firebaseConfig = {
 };
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideRouter(routes),
+
+
+  
+
+  provideFirebaseApp(() => initializeApp(firebaseConfig)),
+  provideFirestore(() => getFirestore())
+
+  ]
 };
