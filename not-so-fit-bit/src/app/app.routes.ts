@@ -7,8 +7,20 @@ import { NewDayComponent } from './new-day/new-day.component';
 
 export const routes: Routes = [
 
-{
-
-}
+    {
+        path: 'home',
+        component: DayCardComponent,
+        title: 'home'
+    },
+    {
+        path: 'edit/:id',
+        component: EditDayComponent,
+        title: 'edit'
+    },
+    {
+        path: 'add',
+        component: NewDayComponent,
+        title: 'add'
+    }
 
 ];
