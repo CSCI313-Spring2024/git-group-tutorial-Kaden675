@@ -7,7 +7,7 @@ export interface Day {
   workout: string,
   exerciseDuration: string,
   fluid: string,
-  calorie: number,
+  calorie: string,
 }
 
 @Injectable({
@@ -24,7 +24,7 @@ export class DayService {
       workout: "bench",
       exerciseDuration: "1 hour",
       fluid: "1 liter",
-      calorie: 2000 
+      calorie: "2000" 
     },
 
 ]
