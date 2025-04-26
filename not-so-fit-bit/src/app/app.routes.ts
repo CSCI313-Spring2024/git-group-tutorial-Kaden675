@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { DayCardComponent } from './day-card/day-card.component';
 import { EditDayComponent } from './edit-day/edit-day.component';
 import { NewDayComponent } from './new-day/new-day.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
 
 export const appRoutes: Routes = [
 
@@ -15,11 +16,13 @@ export const appRoutes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    title: 'login'
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    title: 'register'
   },
   {
     path: 'home',
@@ -39,6 +42,11 @@ export const appRoutes: Routes = [
     path: 'add',
     component: NewDayComponent,
     title: 'add'
+  },
+  {
+    path: 'my-account',
+    component: EditAccountComponent,
+    title: 'my account'
   }
 
 ];
