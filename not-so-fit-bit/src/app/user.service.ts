@@ -1,28 +1,36 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { Firestore, collection, collectionData, doc, setDoc, getDocs, query, where } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+export interface User{
+  id: string,
+  name: string,
+  email: string,
+  userName: string,
+  password: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private usersKey = 'users';
 
-  register(username: string, password: string): boolean {
-    const users = this.getUsers();
-    if (users.find(u => u.username === username)) {
-      return false; // Username already exists
-    }
-    users.push({ username, password });
-    localStorage.setItem(this.usersKey, JSON.stringify(users));
-    return true;
+  private firestore = inject(Firestore);
+  private userCollection = collection(this.firestore, 'users');
+
+  getUser(): Observable<User[]>{
+    return collectionData(this.userCollection, ({idField: 'id'})) as Observable<User[]>
   }
 
-  login(username: string, password: string): boolean {
-    const users = this.getUsers();
-    return users.some(u => u.username === username && u.password === password);
+  addUser(newUser: User){
+    const userRef = doc(this.userCollection);
+    const newId = userRef.id;
+    newUser.id = newId;
+    setDoc(userRef, newUser);
   }
 
-  private getUsers(): { username: string, password: string }[] {
-    const usersJson = localStorage.getItem(this.usersKey);
-    return usersJson ? JSON.parse(usersJson) : [];
+  checkUsernameExists(userName: string): Promise<boolean> {
+    const usernameQuery = query(this.userCollection, where('userName', '==', userName));
+    return getDocs(usernameQuery).then(snapshot => !snapshot.empty)
   }
 }
