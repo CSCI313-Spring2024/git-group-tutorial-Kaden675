@@ -22,6 +22,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes), 
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    provideHttpClient()
+    provideHttpClient(),
+  
+
+  provideFirebaseApp(() => initializeApp(firebaseConfig)),
+  provideFirestore(() => getFirestore())
   ]
 };
