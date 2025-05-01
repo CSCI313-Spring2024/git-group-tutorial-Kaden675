@@ -6,9 +6,10 @@ import { EditDayComponent } from './edit-day/edit-day.component';
 import { NewDayComponent } from './new-day/new-day.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AboutComponent } from './pages/about/about.component';
+import { SupportComponent } from './pages/support/support.component';
 
 export const appRoutes: Routes = [
-
   {
     path: '',
     redirectTo: '/login',
@@ -17,36 +18,46 @@ export const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    title: 'login'
+    title: 'Login'
   },
   {
     path: 'register',
     component: RegisterComponent,
-    title: 'register'
+    title: 'Register'
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    title: 'Home'
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    title: 'About'
+  },
+  {
+    path: 'support',
+    component: SupportComponent,
+    title: 'Support'
   },
   {
     path: 'day-home',
     component: DayCardComponent,
-    title: 'home'
+    title: 'Day Home'
   },
   {
     path: 'edit/:id',
     component: EditDayComponent,
-    title: 'edit'
+    title: 'Edit Day'
   },
   {
     path: 'add',
     component: NewDayComponent,
-    title: 'add'
+    title: 'Add Day'
   },
   {
     path: 'my-account',
     component: EditAccountComponent,
-    title: 'my account'
+    title: 'My Account'
   }
-
 ];
