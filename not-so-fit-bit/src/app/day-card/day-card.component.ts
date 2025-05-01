@@ -14,6 +14,11 @@ export class DayCardComponent {
 
   days: Day[] = [];
 
+  trackById(index: number, item: any): any {
+    return item.id;
+  }
+
+  
   constructor(private daysService: DayService){
     this.loadDays()
   }

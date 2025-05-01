@@ -1,1 +1,99 @@
-<p>new-day works!</p>
+<div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title text-center">Add a Day</h4>
+  
+        
+        <form class="ng-untouched ng-pristine ng-valid">
+          <div class="form-group row">
+            <label for="name" class="col-sa-2 col-form-label"> date</label>
+  
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="date"
+                class="form-control"
+                [(ngModel)]= "date"
+                name="date"
+                required
+              />
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="phoneNumber" class="col-sa-s col-form-label">
+              Workout</label
+            >
+  
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="Workout"
+                class="form-control"
+                [(ngModel)]= "workout"
+                name="Workout"
+                required
+              />
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="emailAddress" class="col-sa-s col-form-label">
+              Exercise Duration</label
+            >
+  
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="exerciseDuration"
+                class="form-control"
+                [(ngModel)]= "exerciseDuration"
+                name="exerciseDuration"
+                required
+              />
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="phoneNumber" class="col-sa-s col-form-label">
+              Fluid Intake</label
+            >
+  
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="fluid"
+                class="form-control"
+                [(ngModel)]= "fluid"
+                name="fluid"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="phoneNumber" class="col-sa-s col-form-label">
+               Calorie Intake</label
+            >
+  
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="calorie"
+                class="form-control"
+                [(ngModel)]= "calorie"
+                name="calorie"
+                required
+              />
+            </div>
+          </div>
+        </form>
+  
+        <div class="text-right">
+          <button class="btn btn-dark" (click)="onSubmit()">Save</button>
+          <button class="btn btn-dark" (click)="onCancel()">Cancel</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

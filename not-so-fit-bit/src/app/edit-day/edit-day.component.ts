@@ -25,6 +25,7 @@ export class EditDayComponent {
       private daysService: DayService
     ){}
 
+    
   onSubmit(){
     if(this.day){
       this.daysService.deleteDay(this.day.id).subscribe(() => {

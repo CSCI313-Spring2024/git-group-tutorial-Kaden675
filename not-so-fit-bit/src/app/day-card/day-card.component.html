@@ -1,1 +1,17 @@
-<p>day-card works!</p>
+<div class="day-card">
+    <div *ngFor="let day of days; trackBy: trackById">
+      <div class="card text-bg-info">
+        <h3>{{ day.date }}</h3>
+        <h4>{{ day.workout }}</h4>
+        <h4>{{ day.exerciseDuration }}</h4>
+        <h4>{{ day.fluid }}</h4>
+        <h4>{{ day.calorie }}</h4>
+  
+        <div class="buttons">
+          <button class="btn btn-dark" [routerLink]="['/edit', day.id]">Edit</button>
+          <button class="btn btn-dark" (click)="deleteDay(day.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
