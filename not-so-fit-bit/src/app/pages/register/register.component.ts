@@ -27,9 +27,6 @@ export class RegisterComponent {
     this.successMessage = '';
     this.errorMessage = '';
 
-    //Checking to see if the username is already in use
-    //return error message if in use or success message if
-    //registration is successful
     const usernameExists = await this.userService.checkUsernameExists(this.user.userName);
     if(usernameExists) {
       this.errorMessage = 'Username already exists.';
@@ -38,11 +35,11 @@ export class RegisterComponent {
 
     try {
       await this.userService.addUser(this.user);
-      this.successMessage = 'Registration successful!';
+      this.successMessage = 'Registration successful.';
       this.resetForm();
     } catch(error){
       console.error(error);
-      this.errorMessage = 'An error occured while registering.'
+      this.errorMessage = 'An error occured'
     }
   }
 
