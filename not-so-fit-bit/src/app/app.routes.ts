@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DayCardComponent } from './day-card/day-card.component';
 import { EditDayComponent } from './edit-day/edit-day.component';
 import { NewDayComponent } from './new-day/new-day.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const appRoutes: Routes = [
 

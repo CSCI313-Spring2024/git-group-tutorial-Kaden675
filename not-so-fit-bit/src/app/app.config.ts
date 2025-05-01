@@ -4,7 +4,8 @@ import { getAnalytics } from "firebase/analytics";
 import { appRoutes } from './app.routes'; 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { provideHttpClient } from '@angular/common/http'; 
+import { provideHttpClient } from '@angular/common/http';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA7oqbzsWzKV0Q1c1C2iLYU90cECK1Ag3g",
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes), 
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    provideHttpClient()
+    provideHttpClient(),
+    provideAuth(() => getAuth())
   ]
 };

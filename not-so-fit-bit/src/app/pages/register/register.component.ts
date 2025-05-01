@@ -1,55 +1,49 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserService, User } from '../../user.service';
+import { AuthService , UserInfo} from '../../auth.service';
+
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
-  user: User = {
-    id: '',
-    name: '',
+  user: UserInfo = {
+    firstName: '',
+    lastName: '',
     email: '',
-    userName: '',
-    password: ''
-  };
+    password: '',
+  }
 
-  successMessage: string = '';
-  errorMessage: string = '';
-
-  constructor(private userService: UserService){}
-
-  async register(){
-    this.successMessage = '';
-    this.errorMessage = '';
-
-    const usernameExists = await this.userService.checkUsernameExists(this.user.userName);
-    if(usernameExists) {
-      this.errorMessage = 'Username already exists.';
+  private authService = inject(AuthService)
+  
+  register(){
+    if(this.user.firstName == '') {
+      alert('Please enter your first name')
+      return;
+    }
+    if(this.user.lastName == '') {
+      alert('Please enter your last name')
+      return;
+    }
+    if(this.user.email == '') {
+      alert('Please enter your email')
+      return;
+    }
+    if(this.user.password == ''){
+      alert('Please enter a password')
       return;
     }
 
-    try {
-      await this.userService.addUser(this.user);
-      this.successMessage = 'Registration successful.';
-      this.resetForm();
-    } catch(error){
-      console.error(error);
-      this.errorMessage = 'An error occured'
-    }
-  }
-
-  resetForm() {
+    this.authService.register(this.user);
     this.user = {
-      id: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
-      userName: '',
       password: ''
     }
   }
+
 }

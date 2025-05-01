@@ -1,44 +1,34 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserService, User } from '../../user.service';
+import { AuthService } from '../../auth.service';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  username = '';
+ 
+  private authService = inject(AuthService);
+
+  email = '';
   password = '';
-  errorMessage = '';
 
-  constructor(private userService: UserService) {}
-
-  async login() {
-    this.errorMessage = '';
-
-    try {
-      const users = await this.userService.getUser().toPromise();
-
-      if (!users) {
-        this.errorMessage = 'Error retrieving users.';
-        return;
-      }
-
-      const found = users.find(user =>
-        user.userName === this.username && user.password === this.password
-      );
-
-      if (found) {
-        console.log('Login successful');
-      } else {
-        this.errorMessage = 'Invalid credentials';
-      }
-    } catch (error) {
-      console.error(error);
-      this.errorMessage = 'Login failed.';
+  login() {
+    if (this.email == '') {
+      alert('Please enter a valid email');
+      return;
     }
+
+    if (this.password == '') {
+      alert('Please enter your password');
+      return;
+    }
+
+    this.authService.login(this.email, this.password);
+    this.email = '';
+    this.email = '';
   }
 }
