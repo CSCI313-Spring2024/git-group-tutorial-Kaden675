@@ -1,1 +1,43 @@
-<p>edit-account works!</p>
+<h2 class="text-center">Edit Account Information</h2>
+
+<div class="d-flex justify-content-center">
+  <div style="width: 500px">
+    <div class="form-group mt-2">
+      <input
+        [(ngModel)]="firstName"
+        class="form-control"
+        name="firstName"
+        required
+      />
+    </div>
+    <div class="form-group mt-2">
+      <input
+        [(ngModel)]="lastName"
+        class="form-control"
+        name="lastName"
+        required
+      />
+    </div>
+    <div class="form-group mt-2">
+      <input
+        [(ngModel)]="email"
+        class="form-control"
+        name="email"
+        type="email"
+        required
+      />
+    </div>
+    <div class="form-group mt-2">
+      <input
+        [(ngModel)]="password"
+        class="form-control"
+        name="password"
+        placeholder="Enter new password or leave blank to keep current password"
+        type="password"
+        required
+      />
+    </div>
+    <div class="d-grid gap-2 mt-3">
+      <button class="btn btn-primary" (click)="submit()">Save</button>
+  </div>
+</div>

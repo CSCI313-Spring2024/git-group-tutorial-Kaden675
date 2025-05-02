@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, User } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, User, updateEmail, updatePassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 export interface UserInfo{
@@ -70,6 +70,38 @@ forgotPassword(email:string){
     .catch(err => {
       alert(`Something went wrong: ${err.message}`);
     })
+}
+
+updateUserInfo(updated: UserInfo) {
+  const user = this.auth.currentUser;
+  const displayName = updated.firstName + ' ' + updated.lastName;
+
+  if (!user) {
+    alert('No user is currently logged in.');
+    return;
+  }
+
+  updateProfile(user, {displayName})
+    .catch(err => {
+      alert(`Failed to update: ${err.message}`);
+    });
+  
+  if (updated.email) {
+    updateEmail(user, updated.email)
+      .catch(err => {
+        alert(`Failed to update email: ${err.message}`);
+      })
+  }
+
+  if (updated.password) {
+    updatePassword(user, updated.password)
+      .catch(err => {
+        alert(`Failed to update password : ${err.message}`);
+      })
+  }
+
+  alert('Profile Updated');
+  this.router.navigate(['/home'])
 }
 
 getUser(): User | null {

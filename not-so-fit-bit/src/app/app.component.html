@@ -1,42 +1,22 @@
 <div class="container">
   <ul class="nav nav-tabs justify-content-center">
-<<<<<<< HEAD
     <li class="nav-item" *ngIf="isLoggedIn()">
       <a class="nav-link" routerLink="/home">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/">About</a>
+      <a class="nav-link" routerLink="/about">About</a>
     </li>
     <li class="nav-item" *ngIf="!isLoggedIn()">
       <a class="nav-link" routerLink="/register">Register</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/">Support</a>
+      <a class="nav-link" routerLink="/support">Support</a>
     </li>
     <li class="nav-item" *ngIf="isLoggedIn()">
       <a class="nav-link" routerLink="/my-account">My Account</a>
     </li>
     <li class="nav-item" *ngIf="!isLoggedIn()">
       <a class="nav-link" routerLink="/login">Login</a>
-=======
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/support" routerLinkActive="active">Support</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/my-account" routerLinkActive="active">My Account</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
->>>>>>> 700bc77ae4d3a5f0cedc8ebf044d46a4fe1c8ef7
     </li>
     <li class="nav-item" *ngIf="isLoggedIn()">
       <a class="nav-link" (click)="logout()">Logout</a>
