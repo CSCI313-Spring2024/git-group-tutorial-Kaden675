@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DayService } from '../day.service';
-import { Day } from '../day.service';
 
 @Component({
   selector: 'app-new-day',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './new-day.component.html',
   styleUrl: './new-day.component.css'
@@ -31,10 +31,10 @@ export class NewDayComponent {
       exerciseDuration: this.exerciseDuration,
       fluid: this.fluid,
       calorie: this.calorie
-    }).subscribe(() => this.router.navigate(['home']))
+    }).subscribe(() => this.router.navigate(['/home']))
   }
 
   onCancel(){
-    this.router.navigate(['home'])
+    this.router.navigate(['/home'])
   }
 }

@@ -1,15 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { Input } from '@angular/core';
 import { Day } from '../../day.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { DayService } from '../../day.service';
 import { CommonModule } from '@angular/common';
-import { NewDayComponent } from '../../new-day/new-day.component';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CommonModule, NewDayComponent],
+  imports: [RouterLink, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -21,7 +19,7 @@ export class HomeComponent {
   
   days: Day[] = [];
   
-    trackById(index: number, item: any): any {
+    trackById(index: number, item: Day): string {
       return item.id;
     }
   
@@ -34,7 +32,7 @@ export class HomeComponent {
       this.daysService.getDays().subscribe(data => this.days = data)
     }
   
-    deleteDay(id:number){
+    deleteDay(id:string){
       this.daysService.deleteDay(id).subscribe(() => this.loadDays)
     }
 }

@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { collection, collectionData, CollectionReference, deleteDoc, doc, docData, DocumentSnapshot, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { Observable, of, switchMap, take, from, map } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface Day {
-  id: number,
+  id: string,
   date: string,
   workout: string,
   exerciseDuration: string,
@@ -17,43 +19,76 @@ export interface Day {
 
 export class DayService {
 
-  private Days: Day[] = [
-    {
-      id: 99999,
-      date: "April 26",
-      workout: "bench",
-      exerciseDuration: "1 hour",
-      fluid: "1 liter",
-      calorie: "2000" 
-    },
+  private firestore = inject(Firestore);
+  private authService = inject(AuthService);
 
-]
+  constructor() {}
 
-private nextId = this.Days.length;
+getDays() {
+  return this.authService.user$.pipe(
+    switchMap(user => {
+      if (!user) return of([]);
+      const ref = collection(this.firestore, `users/${user.uid}/days`) as CollectionReference<Day>;
+      return collectionData<Day>(ref, {idField: 'id'});
+    })
+  );
+}
 
-  constructor() { }
-
-  getDays(){
-    return of([...this.Days]);
-  }
-
-  getDayById(id: number){
-    return of(this.Days.find( Days => Days.id === id)!);
-  }
-
-  addDay(day: Omit<Day, 'id'>){
-    const newDay = {...day, id: this.nextId++};
-    this.Days.push(newDay);
-    return of(newDay)
-  }
-  updateDay(id: number, updated: Partial<Day>){
-    const index = this.Days.findIndex( days => days.id === id);
-    if(index !== -1){
-      this.Days[index]={...this.Days[index], ...updated};
+getDayById(id: string): Observable<Day | undefined> {
+  const user = this.authService.getUser();
+  if (!user) {
+    return of (undefined);
     }
-  }
-  deleteDay(id:number){
-    this.Days = this.Days.filter(Days=>Days.id !== id);
-    return of(true)
-  }
+
+  const dayRef = doc(this.firestore, `users/${user.uid}/days/${id}`);
+
+  return from(getDoc(dayRef)).pipe(
+    map (docSnap => {
+      if (docSnap.exists()){
+      const data = docSnap.data() as Omit<Day, 'id'>;
+      return{
+        id: docSnap.id,
+        ...data
+      } as Day;
+    }
+    return undefined;
+  })
+  );
+}
+
+addDay(day: Omit<Day, 'id'>) {
+  return this.authService.user$.pipe(
+    take(1),
+    switchMap(async user => {
+      if (!user) return null;
+      const id = doc(collection(this.firestore, `users/${user.uid}/days`)).id;
+      const ref = doc(this.firestore, `users/${user.uid}/days/${id}`);
+      await setDoc(ref, day);
+      return {...day, id};
+    })
+  )
+}
+
+updateDate(id: string, updated: Partial<Day>) {
+  return this.authService.user$.pipe(
+    take(1),
+    switchMap(user => {
+      if (!user) return of (null);
+      const ref = doc(this.firestore, `users/${user.uid}/days/${id}`);
+      return updateDoc(ref, updated);
+    })
+  );
+}
+
+deleteDay(id: string) {
+  return this.authService.user$.pipe(
+    take(1),
+    switchMap(user => {
+      if(!user) return of (null);
+      const ref = doc(this.firestore, `users/${user.uid}/days/${id}`);
+      return deleteDoc(ref);
+    })
+  );
+}
+
 }

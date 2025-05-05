@@ -1,5 +1,7 @@
 <h2 class="text-center">Welcome {{ user?.displayName }}</h2>
-
+<div class="text-center">
+  <button class="btn btn-dark" [routerLink]="['/add']"> Add New Day</button>
+</div>
 <div class="day-card">
     <div *ngFor="let day of days; trackBy: trackById">
       <div class="card text-bg-info">

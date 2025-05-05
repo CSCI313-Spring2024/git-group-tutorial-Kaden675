@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Day } from '../day.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { DayService } from '../day.service';
 import { CommonModule } from '@angular/common';
 
@@ -14,10 +14,6 @@ export class DayCardComponent {
 
   days: Day[] = [];
 
-  trackById(index: number, item: any): any {
-    return item.id;
-  }
-
   
   constructor(private daysService: DayService){
     this.loadDays()
@@ -27,9 +23,11 @@ export class DayCardComponent {
     this.daysService.getDays().subscribe(data => this.days = data)
   }
 
-  deleteDay(id:number){
-    this.daysService.deleteDay(id).subscribe(() => this.loadDays)
+  deleteDay(id: string){
+    this.daysService.deleteDay(id).subscribe(() => this.loadDays())
   }
 
-
+  trackById(index: number, item: Day): string {
+    return item.id;
+  }
 }

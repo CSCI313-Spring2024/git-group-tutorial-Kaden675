@@ -13,63 +13,63 @@ import { DayService, Day } from '../day.service';
 export class EditDayComponent {
 
     day?: Day;
-    date: string="";
-    workout: string="";
-    exerciseDuration: string="";
-    fluid: string="";
-    calorie: string="";
+    date = "";
+    workout = "";
+    exerciseDuration = "";
+    fluid = "";
+    calorie = "";
 
     constructor(
       private route: ActivatedRoute,
       private router: Router,
-      private daysService: DayService
+      private daysService: DayService,
     ){}
 
     
   onSubmit(){
-    if(this.day){
-      this.daysService.deleteDay(this.day.id).subscribe(() => {
-        
-        this.daysService.addDay({
-          date: this.date,
-          workout: this.workout,
-          exerciseDuration: this.exerciseDuration,
-          fluid: this.fluid,
-          calorie: this.calorie
-        }).subscribe(()=>this.router.navigate(['home']));
-      })
-    }else{
-      this.daysService.addDay({
-        date: this.date,
-        workout: this.workout,
-        exerciseDuration: this.exerciseDuration,
-        fluid: this.fluid,
-        calorie: this.calorie
-      }).subscribe(()=>this.router.navigate(['home']));
+    const updatedData = {
+      date: this.date,
+      workout: this.workout,
+      exerciseDuration: this.exerciseDuration,
+      fluid: this.fluid,
+      calorie: this.calorie
+    };
+
+    if(this.day) {
+      this.daysService.updateDate(this.day.id, updatedData).subscribe(() => {
+        this.router.navigate(['/home'])
+      });
+    } else {
+      this.daysService.addDay(updatedData).subscribe(() => {
+        this.router.navigate(['/home'])
+      });
     }
   }
 
   onCancel(){
-    this.router.navigate(['home'])
+    this.router.navigate(['/home'])
   }
 
   ngOnInit(){
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if(!id) {
+      this.router.navigate(['/home']);
+      return;
+    }
+
     this.daysService.getDayById(id).subscribe(day =>{
-      if(day){
-        this.day = day;
-        this.date = day.date;
-        this.workout = day.workout;
-        this.exerciseDuration = day.exerciseDuration;
-        this.fluid = day.fluid;
-        this.calorie = day.calorie;
+      if(!day){
+        this.router.navigate(['/home']);
+        return;
       }
-    })
+
+      this.day = day;
+      this.date = day.date;
+      this.workout = day.workout;
+      this.exerciseDuration = day.exerciseDuration;
+      this.fluid = day.fluid;
+      this.calorie = day.calorie
+    });
   }
-
-
-
-
-
-
 }

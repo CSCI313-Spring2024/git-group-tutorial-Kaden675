@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, User, updateEmail, updatePassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, User, updateEmail, updatePassword, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 export interface UserInfo{
   firstName: string,
@@ -17,6 +18,7 @@ export class AuthService {
   private auth = inject(Auth);
   private router = inject(Router);
   loggedIn = signal<boolean>(false);
+  user$: Observable<User | null> = authState(this.auth);
 
   constructor(){
     this.auth.onAuthStateChanged(user => {
