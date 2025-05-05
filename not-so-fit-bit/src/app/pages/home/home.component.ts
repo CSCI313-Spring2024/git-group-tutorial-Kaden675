@@ -35,6 +35,6 @@ export class HomeComponent {
     }
   
     deleteDay(id:number){
-      this.daysService.deleteDay(id).subscribe(() => this.loadDays)
+      this.daysService.deleteDay(id).subscribe(() => this.loadDays())
     }
 }
