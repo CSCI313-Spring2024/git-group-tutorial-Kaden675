@@ -1,0 +1,10 @@
+.day-card {
+    max-width: 360px;
+    margin: 0 auto 1.5rem auto;
+    font-size: 1.2rem;
+    user-select: none;
+    text-align: center;
+    box-shadow: 5px 5px 10px #5a5a5a;
+    padding: 1rem;
+    box-shadow: red;
+}
