@@ -1,10 +1,10 @@
 .day-card {
-    max-width: 360px;
-    
+    max-width: 480px;
+    min-width: 360px;
     font-size: 1.2rem;
     user-select: none;
     text-align: center;
-    padding: 1rem;
+    padding: 2rem;
     box-shadow: red;
     margin-bottom: 1.5rem;
    
